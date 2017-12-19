@@ -12,6 +12,6 @@ app.config.from_envvar('APP_CONFIG_FILE')
 # Database
 db = SQLAlchemy(app)
 
-@app.route('/ping', methods=['GET'])
-def ping_pong():
-    return jsonify({ 'status': 'success', 'message': 'pong' })
+@app.route('/hello', methods=['GET'])
+def hello_world():
+    return jsonify({ 'status': 'success', 'message': 'world' })
