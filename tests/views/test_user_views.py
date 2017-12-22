@@ -16,7 +16,7 @@ class TestUserViews(BaseTestCase):
                 email='habukagumba@gmail.com',
                 role='FullStack Developer')
             response = self.client.post(
-                '/users',
+                '/users/',
                 data=json.dumps(payload),
                 content_type='application/json'
             )
@@ -31,7 +31,7 @@ class TestUserViews(BaseTestCase):
         """ Add a user with invalid payload """
         with self.client:
             response = self.client.post(
-                '/users',
+                '/users/',
                 data=json.dumps(dict(email='habu')),
                 content_type='application/json'
             )
@@ -49,7 +49,7 @@ class TestUserViews(BaseTestCase):
         """ Add a user with invalid payload """
         with self.client:
             response = self.client.post(
-                '/users',
+                '/users/',
                 data=json.dumps(dict(role='FullStack Developer')),
                 content_type='application/json'
             )
@@ -66,7 +66,7 @@ class TestUserViews(BaseTestCase):
         with self.client:
             user = UserFactory.create()
             response = self.client.post(
-                '/users',
+                '/users/',
                 data=json.dumps(dict(
                     username=user.username,
                     email=user.email,
@@ -107,7 +107,7 @@ class TestUserViews(BaseTestCase):
         user1 = UserFactory()
         user2 = UserFactory()
         with self.client:
-            response = self.client.get('/users')
+            response = self.client.get('/users/')
             data = json.loads(response.data.decode())
 
             self.assertEqual(response.status_code, 200)
