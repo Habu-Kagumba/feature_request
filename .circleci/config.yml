@@ -6,10 +6,18 @@ jobs:
       - image: circleci/postgres:latest
       - image: nginx:1.13.0
 
-    working_directory: $CIRCLE_WORKING_DIRECTORY
+    working_directory: ~/project
 
     steps:
       - checkout
+
+      - run:
+          name: post checkout check
+          command: |
+            echo $PWD
+            ls -aslh .
+            ls -aslh ~
+            ls -aslh ~/project
 
       - setup-remote_docker
 

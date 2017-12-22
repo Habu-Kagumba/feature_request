@@ -15,8 +15,6 @@ services:
     container_name: web
     command: gunicorn -b 0.0.0.0:5000 manage:app
     build: .
-    volumes:
-      - '.:/usr/src'
     ports:
       - 5001:5000
     env_file:
