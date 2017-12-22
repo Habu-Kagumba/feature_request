@@ -15,8 +15,6 @@ services:
     build: .
     ports:
       - 5001:5000
-    env_file:
-      - test.env
     depends_on:
       - db
 
