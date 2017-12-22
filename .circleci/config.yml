@@ -6,7 +6,7 @@ jobs:
       - image: circleci/postgres:latest
       - image: nginx:1.13.0
 
-    working_directory: ~/
+    working_directory: $CIRCLE_WORKING_DIRECTORY
 
     steps:
       - checkout
