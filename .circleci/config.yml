@@ -28,8 +28,8 @@ jobs:
             docker-compose -f docker-compose-test.yml ps
           environment:
             APP_CONFIG_FILE: ~/project/app/config/test.py
-            DATABASE_URL=postgres://test:@db:5432/feature_requests_dev
-            DATABASE_TEST_URL=postgres://test:@db:5432/feature_requests_test
+            DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
+            DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
 
       - run:
           name: Run tests
@@ -37,8 +37,8 @@ jobs:
             docker-compose -f docker-compose-test.yml run web python manage.py test
           environment:
             APP_CONFIG_FILE: ~/project/app/config/test.py
-            DATABASE_URL=postgres://test:@db:5432/feature_requests_dev
-            DATABASE_TEST_URL=postgres://test:@db:5432/feature_requests_test
+            DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
+            DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
 
       - store_artifacts:
           path: test-reports
