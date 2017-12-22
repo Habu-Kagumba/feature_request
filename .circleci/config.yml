@@ -20,17 +20,17 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
       - run:
-        name: Start container and verify it is working
-        command: |
-          set -x
-          docker-compose -f docker-compose-test.yml up -d --build
-          docker run --network container:web appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:5001/users
+          name: Start container and verify it is working
+          command: |
+            set -x
+            docker-compose -f docker-compose-test.yml up -d --build
+            docker run --network container:web appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:5001/users
 
       - run:
-        name: Run tests
-        command: |
-          docker-compose -f docker-compose-test.yml run web python manage.py test
+          name: Run tests
+          command: |
+            docker-compose -f docker-compose-test.yml run web python manage.py test
 
       - store_artifacts:
-        path: test-reports
-        destination: test-reports
+          path: test-reports
+          destination: test-reports
