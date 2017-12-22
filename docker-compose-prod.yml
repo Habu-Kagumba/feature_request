@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    container_name: db
+    build: ./db
+    ports:
+      - 5435:5432
+    env_file:
+      - prod.env
+    healthcheck:
+      test: exit 0
+
+  web:
+    container_name: web
+    command: gunicorn -b 0.0.0.0:5000 manage:app
+    build: .
+    ports:
+      - 5001:5000
+    env_file:
+      - prod.env
+    depends_on:
+      - db
+
+  nginx:
+    container_name: nginx
+    build: ./nginx/
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - web

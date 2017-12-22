@@ -13,6 +13,7 @@ services:
 
   web:
     container_name: web
+    command: gunicorn -b 0.0.0.0:5000 manage:app
     build: .
     volumes:
       - '.:/usr/src'
@@ -22,3 +23,12 @@ services:
       - dev.env
     depends_on:
       - db
+
+  nginx:
+    container_name: nginx
+    build: ./nginx/
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - web
