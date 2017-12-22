@@ -1,10 +1,24 @@
 import unittest
+import coverage
 
 from flask import url_for
 from flask_script import Manager
 
 from app import create_app, db
 from app.users.models import User # noqa
+
+COV = coverage.coverage(
+    branch=True,
+    include='./*',
+    omit=[
+        'tests/*',
+        'env/*',
+        'nginx/*',
+        'manage.py'
+    ]
+)
+
+COV.start()
 
 app = create_app()
 manager = Manager(app)
@@ -44,6 +58,22 @@ def list_routes():
 
     for line in sorted(output):
         print(line)
+
+
+@manager.command
+def cov():
+    """ Run tests with coverage """
+    tests = unittest.TestLoader().discover('tests', pattern='test*.py')
+    result = unittest.TextTestRunner(verbosity=2).run(tests)
+    if result.wasSuccessful():
+        COV.stop()
+        COV.save()
+        print('Coverage summary')
+        COV.report()
+        COV.html_report()
+        COV.erase()
+        return 0
+    return 1
 
 
 if __name__ == "__main__":

@@ -30,7 +30,8 @@ docs/_build/
 .python-version
 
 # Environments
-*.env
+prod.env
+dev.env
 env/
 env.bak/
 

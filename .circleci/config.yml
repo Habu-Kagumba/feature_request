@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3.6.2
+        environment:
+          APP_CONFIG_FILE: ~/project/app/config/test.py
+          DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
+          DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
+      - image: postgres
+        environment:
+          APP_CONFIG_FILE: ~/project/app/config/test.py
+          DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
+          DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
+      - image: nginx:1.13.0
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+
+      - setup-remote_docker
+
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            mv ~/docker-compose /usr/local/bin/docker-compose
+
+      - run:
+          name: Start container and verify it is working
+          command: |
+            set -x
+            docker-compose -f docker-compose-test.yml up -d --build
+            docker-compose -f docker-compose-test.yml ps
+
+      - run:
+          name: Run tests
+          command: |
+            docker-compose -f docker-compose-test.yml run web python manage.py test
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports

@@ -7,7 +7,7 @@ services:
     ports:
       - 5435:5432
     env_file:
-      - dev.env
+      - test.env
     healthcheck:
       test: exit 0
 
@@ -15,12 +15,10 @@ services:
     container_name: web
     command: gunicorn -b 0.0.0.0:5000 manage:app
     build: .
-    volumes:
-      - '.:/usr/src'
     ports:
       - 5001:5000
     env_file:
-      - dev.env
+      - test.env
     depends_on:
       - db
 
