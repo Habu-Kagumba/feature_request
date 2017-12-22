@@ -6,8 +6,6 @@ services:
     build: ./db
     ports:
       - 5435:5432
-    env_file:
-      - test.env
     healthcheck:
       test: exit 0
 
