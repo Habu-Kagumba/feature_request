@@ -11,8 +11,8 @@ services:
     healthcheck:
       test: exit 0
 
-  web:
-    container_name: web
+  api:
+    container_name: api
     command: gunicorn -b 0.0.0.0:5000 manage:app
     build: .
     ports:
@@ -22,6 +22,16 @@ services:
     depends_on:
       - db
 
+  client:
+    container_name: client
+    build: ./client
+    ports:
+      - 9000:9000
+    env_file:
+      - test.env
+    depends_on:
+      - api
+
   nginx:
     container_name: nginx
     build: ./nginx/
@@ -29,4 +39,5 @@ services:
     ports:
       - 80:80
     depends_on:
-      - web
+      - api
+      - client
