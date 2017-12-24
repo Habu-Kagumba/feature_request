@@ -8,3 +8,4 @@ factory-boy==2.9.2
 gunicorn==19.7.1
 coverage==4.4.2
 coverage==4.4.2
+Flask-Cors==3.0.3
