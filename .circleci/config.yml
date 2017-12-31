@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            docker-compose -f docker-compose-test.yml run api python manage.py test
+            docker-compose -f docker-compose-test.yml run api python manage.py cov
 
       - store_artifacts:
           path: test-reports
