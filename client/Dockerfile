@@ -18,4 +18,3 @@ ADD . /usr/src/app
 RUN npm run build
 
 CMD ["npm", "run", "prod"]
-# CMD ["npm", "run", "dev"]

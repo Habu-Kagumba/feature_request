@@ -26,11 +26,11 @@ def create_app():
 
     users_api = UserAPI.as_view('users_api')
     app.add_url_rule(
-        '/users/', defaults={'username': None}, view_func=users_api,
+        '/users/', defaults={'datum': None}, view_func=users_api,
         methods=['GET'])
     app.add_url_rule('/users/', view_func=users_api, methods=['POST'])
     app.add_url_rule(
-        '/users/<string:username>', view_func=users_api,
+        '/users/<string:datum>', view_func=users_api,
         methods=['GET'])
     app.register_blueprint(api)
 

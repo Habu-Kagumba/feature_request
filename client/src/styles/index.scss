@@ -1,4 +1,24 @@
-h2 {
-  font-weight: bold;
-  color: red;
+// Global
+body {
+  .svg {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+
+    svg {
+      transform: scale(20) rotate(45deg) translate(24%, 14%);
+    }
+  }
+}
+
+// Login page
+.login-form {
+  margin-top: 10%;
+
+  button {
+    margin-top: 5%;
+  }
 }
