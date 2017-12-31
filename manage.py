@@ -4,6 +4,8 @@ import coverage
 from flask import url_for
 from flask_script import Manager
 
+from faker import Faker
+
 from app import create_app, db
 from app.users.models import User # noqa
 
@@ -29,6 +31,30 @@ def recreate_db():
     """ Recreates the Database. """
     db.drop_all()
     db.create_all()
+    db.session.commit()
+
+
+@manager.command
+def seed_db():
+    """ Seeds the DB with some default records. """
+    faker = Faker()
+
+    # User
+    users = []
+    for i in list(range(10)):
+        users.append({
+            'username': faker.user_name(),
+            'email': faker.email(),
+            'role': faker.job()
+        })
+
+    for user in users:
+        db.session.add(User(
+            username=user['username'],
+            email=user['email'],
+            role=user['role']
+        ))
+
     db.session.commit()
 
 

@@ -1,4 +1,11 @@
 {
     "extends": "airbnb-base",
-    "globals": { "fetch": false }
+    "globals": { "fetch": false, "Headers": false, "location": false },
+    "rules": {
+      "curly": ["error", "multi-line"],
+      "no-useless-return": "off",
+      "no-lonely-if": "off",
+      "no-param-reassign": "off",
+      "arrow-body-style": "off"
+    }
 }

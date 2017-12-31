@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './src/app.js'],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -14,7 +14,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/template/index.html',
+      template: 'src/templates/index.html',
     }),
     new CleanWebpackPlugin(['dist']),
     new webpack.NamedModulesPlugin(),
@@ -25,12 +25,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['babel-preset-env'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['babel-preset-env'],
+            },
           },
-        },
+          {
+            loader: 'string-replace-loader',
+            query: {
+              search: 'http://192.168.99.100/',
+              replace: '/',
+            },
+          },
+        ],
       },
       {
         test: /\.scss$/,

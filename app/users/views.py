@@ -1,5 +1,5 @@
 from flask import request, jsonify, abort, make_response
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy import exc
 
 from app import db
 from app.base.views import APIEndpoint
@@ -28,18 +28,19 @@ class UserAPI(APIEndpoint):
             db.session.commit()
 
             return jsonify(schema.dump(user).data), 201
-        except IntegrityError as e:
+        except exc.IntegrityError as e:
             abort(make_response(jsonify(message=e.orig.args), 400))
 
-    def get(self, username):
+    def get(self, datum):
         """ Get user(s)
 
-        :user_id: The user id. If empty, get all users
+        :datum: The user's username or email. If empty, get all users
         """
-        if username is None:
+        if datum is None:
             return jsonify(schema.dump(User.query.all(), many=True).data)
         else:
-            user = User.query.filter_by(username=username).first()
+            user = User.query.filter(
+                (User.username == datum) | (User.email == datum)).first()
             if not user:
                 return jsonify(message='User not found'), 404
             else:
