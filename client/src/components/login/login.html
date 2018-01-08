@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      <section class="box login-form">
+        <form data-bind="submit: loginUser">
+          <div class="field">
+            <label class="label">Username / Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Enter your username or email address" data-bind="textInput: usernameEmail, event: { keyup: showUsernameEmailStatus() }">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="icon is-small is-right" data-bind="visible: onUsernameEmailKeyup()">
+                <i class="fa fa-check has-text-success" data-bind="visible: usernameEmail.errors().length === 0"></i>
+                <i class="fa fa-warning has-text-danger" data-bind="visible: usernameEmail.errors().length > 0"></i>
+              </span>
+            </div>
+            <ul class="help has-text-danger" data-bind="
+              foreach: usernameEmail.errors(),
+              visible: usernameEmail.errors().length > 0">
+              <li data-bind="text: message"></li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input id="password" class="input" type="password" placeholder="Enter a prefered password" data-bind="textInput: password, event: { keyup: showPasswordStatus() }">
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right" data-bind="visible: onPasswordKeyup()">
+                <i class="fa fa-check has-text-success" data-bind="visible: password.errors().length === 0"></i>
+                <i class="fa fa-warning has-text-danger" data-bind="visible: password.errors().length > 0"></i>
+              </span>
+            </div>
+            <ul class="help has-text-danger" data-bind="
+              foreach: password.errors(),
+              visible: password.errors().length > 0">
+              <li data-bind="text: message"></li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary"
+                data-bind="enable: allValid()">Submit</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

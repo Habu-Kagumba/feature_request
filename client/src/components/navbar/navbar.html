@@ -1,0 +1,19 @@
+<nav class="navbar has-shadow">
+  <div class="navbar-brand">
+    <div class="navbar-burger burger" data-target="navbarMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="navbar-menu" id="navbarMenu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="#/">Home</a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" href="#/signup" data-bind="visible: !isAuthenticated()">Signup</a>
+      <a class="navbar-item" href="#/login" data-bind="visible: !isAuthenticated()">Login</a>
+      <a class="navbar-item" href="#/logout" data-bind="visible: isAuthenticated()">Logout</a>
+    </div>
+  </div>
+</nav>

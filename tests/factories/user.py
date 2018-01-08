@@ -1,7 +1,7 @@
 from factory import Faker, alchemy
 
 from app import db
-from app.users.models import User
+from app.api.user.model import User
 
 
 class UserFactory(alchemy.SQLAlchemyModelFactory):
@@ -11,4 +11,5 @@ class UserFactory(alchemy.SQLAlchemyModelFactory):
 
     username = Faker('user_name')
     email = Faker('email')
+    password = Faker('pystr')
     role = Faker('job')

@@ -1,9 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 
-# Database
 db = SQLAlchemy()
+migrate = Migrate()
+bcrypt = Bcrypt()
 
 
 def create_app():
@@ -19,19 +22,14 @@ def create_app():
 
     # DB Extensions
     db.init_app(app)
+    bcrypt.init_app(app)
+    migrate.init_app(app, db)
 
     # Blueprints && PluggableViews
-    from app.users.views import UserAPI
-    from app.base.views import api
+    from app.api import api_blueprint
+    from app.auth import auth_blueprint
 
-    users_api = UserAPI.as_view('users_api')
-    app.add_url_rule(
-        '/users/', defaults={'datum': None}, view_func=users_api,
-        methods=['GET'])
-    app.add_url_rule('/users/', view_func=users_api, methods=['POST'])
-    app.add_url_rule(
-        '/users/<string:datum>', view_func=users_api,
-        methods=['GET'])
-    app.register_blueprint(api)
+    app.register_blueprint(api_blueprint)
+    app.register_blueprint(auth_blueprint)
 
     return app
