@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      <section class="box register-form">
+        <article class="message is-info" data-bind="visible: isAuthenticated()">
+          <div class="message-header">
+            <p>You are already authenticated! 🤷🏿‍ </p>
+          </div>
+          <div class="message-body">
+            <p>It seems you are already authenticated, if you want to register another account for some reason, you can <a href="/#/logout">Logout</a> first.</p>
+          </div>
+        </article>
+
+        <form data-bind="submit: registerUser, visible: !isAuthenticated()">
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Enter your username" data-bind="textInput: username, event: { keyup: showUsernameStatus() }">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="icon is-small is-right" data-bind="visible: onUsernameKeyup()">
+                <i class="fa fa-check has-text-success" data-bind="visible: username.errors().length === 0"></i>
+                <i class="fa fa-warning has-text-danger" data-bind="visible: username.errors().length > 0"></i>
+              </span>
+              <ul class="help has-text-danger" data-bind="
+                foreach: username.errors(),
+                visible: username.errors().length > 0">
+                <li data-bind="text: message"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="email" placeholder="Enter your email address" data-bind="textInput: email, event: { keyup: showEmailStatus() }">
+              <span class="icon is-small is-left">
+                <i class="fa fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right" data-bind="visible: onEmailKeyup()">
+                <i class="fa fa-check has-text-success" data-bind="visible: email.errors().length === 0"></i>
+                <i class="fa fa-warning has-text-danger" data-bind="visible: email.errors().length > 0"></i>
+              </span>
+            </div>
+            <ul class="help has-text-danger" data-bind="
+              foreach: email.errors(),
+              visible: email.errors().length > 0">
+              <li data-bind="text: message"></li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input id="password" class="input" type="password" placeholder="Enter a prefered password" data-bind="textInput: password, event: { keyup: showPasswordStatus() }">
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right" data-bind="visible: onPasswordKeyup()">
+                <i class="fa fa-check has-text-success" data-bind="visible: password.errors().length === 0"></i>
+                <i class="fa fa-warning has-text-danger" data-bind="visible: password.errors().length > 0"></i>
+              </span>
+            </div>
+            <ul class="help has-text-danger" data-bind="
+              foreach: password.errors(),
+              visible: password.errors().length > 0">
+              <li data-bind="text: message"></li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="password" placeholder="Repeat the password" data-bind="textInput: confirmPassword, event: { focus: showConfirmPasswordStatus() }">
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right" data-bind="visible: onConfirmPasswordFocus">
+                <i class="fa fa-check has-text-success" data-bind="visible: confirmPassword.errors().length === 0"></i>
+                <i class="fa fa-warning has-text-danger" data-bind="visible: confirmPassword.errors().length > 0"></i>
+              </span>
+            </div>
+            <ul class="help has-text-danger" data-bind="
+              foreach: confirmPassword.errors(),
+              visible: confirmPassword.errors().length > 0">
+              <li data-bind="text: message"></li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <label class="label">Role</label>
+            <div class="control has-icons-left">
+              <div class="select">
+                <select class="is-fullwidth" data-bind="
+                  textInput: role,
+                  options: roles,
+                  optionsText: 'title',
+                  optionsValue: 'id',
+                  optionsCaption: 'Choose your role.',
+                  event: { change: showRoleStatus() }">
+                </select>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fa fa-briefcase"></i>
+              </div>
+              <ul class="help has-text-danger" data-bind="
+                foreach: role.errors(),
+                visible: role.errors().length > 0">
+                <li data-bind="text: message"></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary"
+                data-bind="enable: allValid()">Submit</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

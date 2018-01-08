@@ -3,11 +3,13 @@ import coverage
 
 from flask import url_for
 from flask_script import Manager
+from flask_migrate import MigrateCommand
 
 from faker import Faker
 
 from app import create_app, db
-from app.users.models import User # noqa
+from app.api.user.model import User # noqa
+from app.auth.blacklist_token_model import BlacklistToken # noqa
 
 COV = coverage.coverage(
     branch=True,
@@ -24,6 +26,8 @@ COV.start()
 
 app = create_app()
 manager = Manager(app)
+
+manager.add_command('db', MigrateCommand)
 
 
 @manager.command
@@ -45,6 +49,7 @@ def seed_db():
         users.append({
             'username': faker.user_name(),
             'email': faker.email(),
+            'password': faker.pystr(),
             'role': faker.job()
         })
 
@@ -52,6 +57,7 @@ def seed_db():
         db.session.add(User(
             username=user['username'],
             email=user['email'],
+            password=user['password'],
             role=user['role']
         ))
 

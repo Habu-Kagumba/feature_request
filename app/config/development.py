@@ -3,3 +3,4 @@ import os
 
 DEBUG = True
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+BCRYPT_LOG_ROUNDS = 4
