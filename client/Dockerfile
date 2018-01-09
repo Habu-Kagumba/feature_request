@@ -1,4 +1,4 @@
-FROM node:latest
+FROM circleci/node:latest-browsers
 
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
