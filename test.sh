@@ -13,8 +13,7 @@ inspect() {
   fi
 }
 
-# docker-compose -f docker-compose-test.yml run api python manage.py cov
-docker-compose run api python manage.py cov
+docker-compose -f docker-compose-test.yml run api python manage.py cov
 inspect $? api
 
 dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
