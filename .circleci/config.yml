@@ -4,12 +4,8 @@ jobs:
     docker:
       - image: circleci/node:latest-browsers
         environment:
-          NODE_ENV: test
           DISPLAY: :99
           CHROME_BIN: /usr/bin/google-chrome
-          APP_CONFIG_FILE: ~/project/app/config/test.py
-          DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
-          DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
           TEST_URL: http://127.0.0.1
 
     working_directory: ~/project

@@ -6,6 +6,8 @@ services:
     build: ./db
     ports:
       - 5435:5432
+    env_file:
+      - test.env
     healthcheck:
       test: exit 0
 
@@ -15,6 +17,8 @@ services:
     build: .
     ports:
       - 5001:5000
+    env_file:
+      - test.env
     depends_on:
       - db
 
@@ -23,6 +27,8 @@ services:
     build: ./client
     ports:
       - 9000:9000
+    env_file:
+      - test.env
     depends_on:
       - api
 
