@@ -16,8 +16,10 @@ inspect() {
 docker-compose -f docker-compose-test.yml run api python manage.py cov
 inspect $? api
 
-docker-compose -f docker-compose-test.yml run client npm run e2e
+cd "clients"
+npm run e2e
 inspect $? e2e
+cd -
 
 if [ -n "${fails}" ]; then
   printf "\n${RED}✗ Failures: ${fails}${NORMAL}\n"

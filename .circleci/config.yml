@@ -16,6 +16,7 @@ jobs:
         environment:
           TEST_URL: http://api
       - image: nginx:1.13.0
+      - image: selenium/standalone-chrome
 
     working_directory: ~/project
 
