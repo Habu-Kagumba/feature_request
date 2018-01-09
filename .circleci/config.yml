@@ -2,21 +2,21 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-browsers
+      - image: circleci/python:3.6.2
         environment:
           APP_CONFIG_FILE: ~/project/app/config/test.py
           DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
           DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
-          DISPLAY: :99
-          CHROME_BIN: /usr/bin/google-chrome
       - image: circleci/postgres:latest
         environment:
           APP_CONFIG_FILE: ~/project/app/config/test.py
           DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
           DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
-      - image: circleci/node:latest
+      - image: circleci/node:latest-browsers
         environment:
           TEST_URL: http://127.0.0.1
+          DISPLAY: :99
+          CHROME_BIN: /usr/bin/google-chrome
       - image: nginx:1.13.0
 
     working_directory: ~/project
