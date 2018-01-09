@@ -6,7 +6,7 @@ jobs:
         environment:
           DISPLAY: :99
           CHROME_BIN: /usr/bin/google-chrome
-          TEST_URL: http://127.0.0.1
+          TEST_URL: http://localhost
 
     working_directory: ~/project
 
@@ -14,13 +14,6 @@ jobs:
       - checkout
 
       - setup-remote_docker
-
-      - run:
-          name: System information
-          command: |
-            echo "node $(node -v)"
-            echo "npm v$(npm --version)"
-            echo "$(google-chrome --version)"
 
       - run:
           name: Install Docker Compose
