@@ -4,7 +4,13 @@
     "node": true
   },
   "extends": "airbnb-base",
-  "globals": { "fetch": false, "Headers": false, "location": false },
+  "globals": {
+    "fetch": false,
+    "Headers": false,
+    "location": false,
+    "fixture": false,
+    "test": false
+  },
   "rules": {
     "curly": ["error", "multi-line"],
     "no-useless-return": "off",
