@@ -12,11 +12,10 @@ jobs:
           APP_CONFIG_FILE: ~/project/app/config/test.py
           DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
           DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
-      - image: circleci/node:latest
+      - image: circleci/node:latest-browsers
         environment:
-          TEST_URL: http://api
+          TEST_URL: http://127.0.0.1
       - image: nginx:1.13.0
-      - image: selenium/standalone-chrome
 
     working_directory: ~/project
 
@@ -47,3 +46,6 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
+
+      - store_test_results:
+        path: /tmp/test-results
