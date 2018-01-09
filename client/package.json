@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "pushstate-server dist",
-    "e2e": "testcafe /usr/bin/google-chrome test/e2e/**/* -r xunit:/tmp/test-results/res.xml"
+    "e2e": "xvfb-run testcafe chrome --no-sandbox test/e2e/**/* -r xunit:/tmp/test-results/res.xml"
   },
   "repository": {
     "type": "git",
