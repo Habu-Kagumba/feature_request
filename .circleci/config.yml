@@ -7,8 +7,8 @@ jobs:
           APP_CONFIG_FILE: ~/project/app/config/test.py
           DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
           DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
-          DISPLAY=:99
-          CHROME_BIN=/usr/bin/google-chrome
+          DISPLAY: :99
+          CHROME_BIN: /usr/bin/google-chrome
       - image: circleci/postgres:latest
         environment:
           APP_CONFIG_FILE: ~/project/app/config/test.py
