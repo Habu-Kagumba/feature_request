@@ -15,40 +15,40 @@ jobs:
 
       - setup-remote_docker
 
-      # - run:
-      #     name: System information
-      #     command: |
-      #       echo "node $(node -v)"
-      #       echo "npm v$(npm --version)"
-      #       echo "$(google-chrome --version)"
+      - run:
+          name: System information
+          command: |
+            echo "node $(node -v)"
+            echo "npm v$(npm --version)"
+            echo "$(google-chrome --version)"
 
-      # - run:
-      #     name: Install Docker Compose
-      #     command: |
-      #       curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-      #       chmod +x ~/docker-compose
-      #       sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
-      # - run:
-      #     name: Start container and verify it is working
-      #     command: |
-      #       docker-compose -f docker-compose-test.yml up -d --build
-      #       docker-compose -f docker-compose-test.yml run api python manage.py db upgrade
-      #       docker-compose -f docker-compose-test.yml ps
+      - run:
+          name: Start container and verify it is working
+          command: |
+            docker-compose -f docker-compose-test.yml up -d --build
+            docker-compose -f docker-compose-test.yml run api python manage.py db upgrade
+            docker-compose -f docker-compose-test.yml ps
 
       - run:
           name: Install testcafe
           command: |
             sudo npm install -g testcafe
 
-      # - run:
-      #     name: Run tests
-      #     command: |
-      #       sh test.sh
+      - run:
+          name: Run tests
+          command: |
+            sh test.sh
 
-      # - store_artifacts:
-      #     path: test-reports
-      #     destination: test-reports
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
 
-      # - store_test_results:
-      #     path: /tmp/test-results
+      - store_test_results:
+          path: /tmp/test-results
