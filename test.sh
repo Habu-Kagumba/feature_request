@@ -16,7 +16,7 @@ inspect() {
 docker-compose -f docker-compose-test.yml run api python manage.py cov
 inspect $? api
 
-docker-compose -f docker-compose-test.yml run client npm run e2e
+testcafe chrome --no-sandbox client/test/e2e/**/*
 inspect $? e2e
 
 if [ -n "${fails}" ]; then

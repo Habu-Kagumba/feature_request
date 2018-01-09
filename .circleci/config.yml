@@ -2,22 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2
-        environment:
-          APP_CONFIG_FILE: ~/project/app/config/test.py
-          DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
-          DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
-      - image: circleci/postgres:latest
-        environment:
-          APP_CONFIG_FILE: ~/project/app/config/test.py
-          DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
-          DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
       - image: circleci/node:latest-browsers
         environment:
-          TEST_URL: http://127.0.0.1
+          NODE_ENV=test
           DISPLAY: :99
           CHROME_BIN: /usr/bin/google-chrome
-      - image: nginx:1.13.0
+          APP_CONFIG_FILE: ~/project/app/config/test.py
+          DATABASE_URL: postgres://test:@db:5432/feature_requests_dev
+          DATABASE_TEST_URL: postgres://test:@db:5432/feature_requests_test
+          TEST_URL=http://127.0.0.1
 
     working_directory: ~/project
 
@@ -27,27 +20,40 @@ jobs:
       - setup-remote_docker
 
       - run:
-          name: Install Docker Compose
+          name: System information
           command: |
-            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            echo "node $(node -v)"
+            echo "npm v$(npm --version)"
+            echo "$(google-chrome --version)"
+            echo "$(chrome --version)"
 
-      - run:
-          name: Start container and verify it is working
-          command: |
-            docker-compose -f docker-compose-test.yml up -d --build
-            docker-compose -f docker-compose-test.yml run api python manage.py db upgrade
-            docker-compose -f docker-compose-test.yml ps
+      # - run:
+      #     name: Install Docker Compose
+      #     command: |
+      #       curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+      #       chmod +x ~/docker-compose
+      #       sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
-      - run:
-          name: Run tests
-          command: |
-            sh test.sh
+      # - run:
+      #     name: Start container and verify it is working
+      #     command: |
+      #       docker-compose -f docker-compose-test.yml up -d --build
+      #       docker-compose -f docker-compose-test.yml run api python manage.py db upgrade
+      #       docker-compose -f docker-compose-test.yml ps
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
+      # - run:
+      #     name: Install testcafe
+      #     command: |
+      #       npm install -g testcafe
 
-      - store_test_results:
-          path: /tmp/test-results
+      # - run:
+      #     name: Run tests
+      #     command: |
+      #       sh test.sh
+
+      # - store_artifacts:
+      #     path: test-reports
+      #     destination: test-reports
+
+      # - store_test_results:
+      #     path: /tmp/test-results

@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "pushstate-server dist",
-    "e2e": "xvfb-run testcafe chrome --no-sandbox test/e2e/**/* -r xunit:/tmp/test-results/res.xml"
+    "e2e": "testcafe chrome test/e2e/**/*"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,6 @@
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
-    "testcafe-reporter-xunit": "^2.1.0",
     "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
