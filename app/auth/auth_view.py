@@ -4,7 +4,7 @@ from sqlalchemy import exc
 
 from app import db, bcrypt
 from app.api.user.model import User, UserSchema
-from app.auth.utils import encode_auth_token, decode_auth_token, authenticate
+from app.auth.utils import encode_auth_token, authenticate
 from app.auth.blacklist_token_model import BlacklistToken
 
 
@@ -100,8 +100,8 @@ class StatusAPI(MethodView):
 
     """ Check User status """
 
-    def get(self):
-        auth_token = request.headers.get('Authorization').split(' ')[1]
-        resp = decode_auth_token(auth_token)
+    decorators = [authenticate]
+
+    def get(self, resp):
         user = User.query.filter_by(id=resp).first()
         return jsonify(schema.dump(user).data)
