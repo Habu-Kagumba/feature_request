@@ -4,7 +4,9 @@ node_js: '8'
 before_install:
   - stty cols 80
 
+dist: trusty
 sudo: required
+group: deprecated-2017Q4
 
 addons:
   apt:
