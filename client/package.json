@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "pushstate-server dist",
-    "e2e": "testcafe chrome test/e2e/**/*"
+    "e2e": "testcafe chrome:headless test/e2e/**/*"
   },
   "repository": {
     "type": "git",
