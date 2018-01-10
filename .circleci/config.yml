@@ -6,7 +6,6 @@ jobs:
         environment:
           DISPLAY: :99
           CHROME_BIN: /usr/bin/google-chrome
-          TEST_URL: http://localhost
 
     working_directory: ~/project
 

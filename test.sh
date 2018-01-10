@@ -16,6 +16,7 @@ inspect() {
 docker-compose -f docker-compose-test.yml run api python manage.py cov
 inspect $? api
 
+export TEST_URL=$(echo $DOCKER_HOST | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
 testcafe chrome:headless client/test/e2e/**/*
 inspect $? e2e
 
