@@ -1,0 +1,39 @@
+language: node_js
+node_js: '8'
+
+before_install:
+  - stty cols 80
+
+dist: trusty
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+services:
+  - docker
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
+  - export TEST_URL=127.0.0.1
+  - export DISPLAY: :99
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - npm install -g testcafe
+  - docker-compose -f docker-compose-test.yml up --build -d
+  - docker-compose -f docker-compose-test.yml run api python manage.py db upgrade
+
+script:
+  - sh test.sh
+
+after_script:
+  - docker-compose -f docker-compose-test.yml down
