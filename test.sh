@@ -20,7 +20,7 @@ testcafe chrome client/test/e2e/**/*
 inspect $? e2e
 
 if [ -n "${fails}" ]; then
-  printf "\n${RED}✗ Failures: ${fails}${NORMAL}\n"
+  printf "\n${RED}✗ Failed!: ${fails}${NORMAL}\n"
   exit 1
 else
   printf "\n${GREEN}✓ Passed!${NORMAL}\n"
