@@ -13,8 +13,6 @@ inspect() {
   fi
 }
 
-npm install -g faker testcafe
-
 docker-compose -f docker-compose-test.yml run api python manage.py cov
 inspect $? api
 
