@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import faker from '../libs/faker.min';
+import faker from 'faker';
 
 const form = Selector('form');
 
