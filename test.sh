@@ -13,14 +13,11 @@ inspect() {
   fi
 }
 
-docker-compose -f docker-compose-test.yml run api python manage.py cov
-inspect $? api
-
-curl -i http://127.0.0.1
-curl -i http://127.0.0.1/#/signup
-
 testcafe chrome:headless client/test/e2e/**/*
 inspect $? e2e
+
+docker-compose -f docker-compose-test.yml run api python manage.py cov
+inspect $? api
 
 if [ -n "${fails}" ]; then
   printf "\n${RED}✗ Failed!: ${fails}${NORMAL}\n"
