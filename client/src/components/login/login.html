@@ -6,7 +6,7 @@
           <div class="field">
             <label class="label">Username / Email</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Enter your username or email address" data-bind="textInput: usernameEmail, event: { keyup: showUsernameEmailStatus() }">
+              <input class="input" type="text" placeholder="Enter your username or email address" data-bind="textInput: usernameEmail, event: { keyup: showUsernameEmailStatus() }, attr: { name: 'username-email' }">
               <span class="icon is-small is-left">
                 <i class="fa fa-user"></i>
               </span>
@@ -25,7 +25,7 @@
           <div class="field">
             <label class="label">Password</label>
             <div class="control has-icons-left has-icons-right">
-              <input id="password" class="input" type="password" placeholder="Enter a prefered password" data-bind="textInput: password, event: { keyup: showPasswordStatus() }">
+              <input id="password" class="input" type="password" placeholder="Enter a prefered password" data-bind="textInput: password, event: { keyup: showPasswordStatus() }, attr: { name: 'password' }">
               <span class="icon is-small is-left">
                 <i class="fa fa-lock"></i>
               </span>

@@ -15,7 +15,7 @@
           <div class="field">
             <label class="label">Username</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Enter your username" data-bind="textInput: username, event: { keyup: showUsernameStatus() }">
+              <input class="input" type="text" placeholder="Enter your username" data-bind="textInput: username, event: { keyup: showUsernameStatus() }, attr: { name: 'username' }">
               <span class="icon is-small is-left">
                 <i class="fa fa-user"></i>
               </span>
@@ -34,7 +34,7 @@
           <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input" type="email" placeholder="Enter your email address" data-bind="textInput: email, event: { keyup: showEmailStatus() }">
+              <input class="input" type="email" placeholder="Enter your email address" data-bind="textInput: email, event: { keyup: showEmailStatus() }, attr: { name: 'email' }">
               <span class="icon is-small is-left">
                 <i class="fa fa-envelope"></i>
               </span>
@@ -53,7 +53,7 @@
           <div class="field">
             <label class="label">Password</label>
             <div class="control has-icons-left has-icons-right">
-              <input id="password" class="input" type="password" placeholder="Enter a prefered password" data-bind="textInput: password, event: { keyup: showPasswordStatus() }">
+              <input id="password" class="input" type="password" placeholder="Enter a prefered password" data-bind="textInput: password, event: { keyup: showPasswordStatus() }, attr: { name: 'password' }">
               <span class="icon is-small is-left">
                 <i class="fa fa-lock"></i>
               </span>
@@ -70,9 +70,9 @@
           </div>
 
           <div class="field">
-            <label class="label">Password</label>
+            <label class="label">Confirm Password</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input" type="password" placeholder="Repeat the password" data-bind="textInput: confirmPassword, event: { focus: showConfirmPasswordStatus() }">
+              <input class="input" type="password" placeholder="Repeat the password" data-bind="textInput: confirmPassword, event: { focus: showConfirmPasswordStatus() }, attr: { name: 'confirm-password' }">
               <span class="icon is-small is-left">
                 <i class="fa fa-lock"></i>
               </span>
@@ -98,7 +98,8 @@
                   optionsText: 'title',
                   optionsValue: 'id',
                   optionsCaption: 'Choose your role.',
-                  event: { change: showRoleStatus() }">
+                  event: { change: showRoleStatus() },
+                  attr: { name: 'role' }">
                 </select>
               </div>
               <div class="icon is-small is-left">

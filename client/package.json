@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
-    "prod": "pushstate-server dist"
+    "prod": "pushstate-server dist",
+    "e2e": "testcafe chrome:headless test/e2e/**/*"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "knockout-store": "^3.0.1",
     "lodash": "^4.17.4",
     "pushstate-server": "^3.0.1",
+    "testcafe": "^0.18.6",
     "validator": "^9.2.0"
   }
 }
