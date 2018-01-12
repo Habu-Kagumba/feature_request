@@ -1,14 +1,15 @@
 import { Selector } from 'testcafe';
-import faker from 'faker';
 
 const form = Selector('form');
 
 export const factories = () => {
+  const randomString = len => Math.random().toString(36).substring(len);
+
   return {
     user: {
-      username: faker.name.firstName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
+      username: randomString(6),
+      email: `${randomString(7)}@${randomString(7)}.com`,
+      password: randomString(4),
       role: 'Engineer',
     },
   };

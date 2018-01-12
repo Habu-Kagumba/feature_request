@@ -7,7 +7,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "pushstate-server dist",
-    "e2e": "testcafe chrome:headless test/e2e/**/*"
+    "e2e": "testcafe firefox test/e2e/**/*"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,6 @@
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
-    "faker": "^4.1.0",
     "file-loader": "^1.1.6",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
