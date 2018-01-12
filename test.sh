@@ -16,7 +16,7 @@ inspect() {
 docker-compose -f docker-compose-test.yml run api python manage.py cov
 inspect $? api
 
-testcafe chrome client/test/e2e/**/*
+testcafe chrome:headless client/test/e2e/**/*
 inspect $? e2e
 
 if [ -n "${fails}" ]; then

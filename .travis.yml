@@ -25,7 +25,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - export TEST_URL=127.0.0.1
+  - export TEST_URL=http://127.0.0.1
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 3
