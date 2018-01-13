@@ -20,7 +20,7 @@ services:
 env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
-    - API=feature_request
+    - API=feature_request_api
     - API_REPO=https://github.com/Habu-Kagumba/${API}.git
     - API_DB=feature_request_db
     - API_DB_REPO=https://github.com/Habu-Kagumba/${API}.git#master:db
