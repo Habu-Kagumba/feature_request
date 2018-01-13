@@ -7,5 +7,5 @@ docker pull $DOCKER_ID/$CLIENT
 docker pull $DOCKER_ID/$NGINX
 
 docker-compose -f docker-compose-test.yml up -d --build
-docker-compose -f docker-compose-test.yml run python manage.py recreate_db
-docker-compose -f docker-compose-test.yml python manage.py db upgrade
+docker-compose -f docker-compose-test.yml run api python manage.py recreate_db
+docker-compose -f docker-compose-test.yml run api python manage.py db upgrade
