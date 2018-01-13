@@ -28,7 +28,7 @@ services:
     ports:
       - 9000:9000
     env_file:
-      - test.env
+      - ci.env
     depends_on:
       - api
 
