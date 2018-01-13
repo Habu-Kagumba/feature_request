@@ -47,7 +47,7 @@ script:
   - sh test.sh
 
 after_script:
-  - docker-compose -f docker-compose-test.yml down
+  - docker-compose -f docker-compose-ci.yml down
 
 after_success:
   - bash ./docker_push.sh
