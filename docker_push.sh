@@ -1,5 +1,14 @@
 #!/bin/sh
 
+docker_build() {
+    local name=$1
+    local app_repo=$2
+
+    docker build "$app_repo" -t "$name":$COMMIT
+    docker tag "$name":$COMMIT $DOCKER_ID/"$name":$TAG
+    docker push $DOCKER_ID/"$name"
+}
+
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
     if [ "$TRAVIS_BRANCH" == "development" ]; then
@@ -33,12 +42,3 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         docker_build $NGINX $NGINX_REPO
     fi
 fi
-
-docker_build() {
-    local name=$1
-    local app_repo=$2
-
-    docker build "$app_repo" -t "$name":$COMMIT
-    docker tag "$name":$COMMIT $DOCKER_ID/"$name":$TAG
-    docker push $DOCKER_ID/"$name"
-}
