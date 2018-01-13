@@ -9,3 +9,4 @@ if [ "$TRAVIS_BRANCH" == "develop" ]; then
 fi
 
 docker-compose -f docker-compose-ci.yml up -d --build
+docker-compose -f docker-compose-ci.yml run api python manage.py recreate_db
