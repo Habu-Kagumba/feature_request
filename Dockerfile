@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt
 
 ADD . /usr/src
 
-CMD ./run.sh
+CMD ["./entrypoint.sh"]
