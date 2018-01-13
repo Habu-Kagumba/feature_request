@@ -12,7 +12,7 @@ docker_build() {
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
     if [ "$TRAVIS_BRANCH" == "develop" ]; then
-        docker login -e $DOCKER_EMAIL -u $DOCKER_ID -p $DOCKER_PASSWORD
+        docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
         export TAG=$TRAVIS_BRANCH
         export REPO=$DOCKER_ID
     fi
