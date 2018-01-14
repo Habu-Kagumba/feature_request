@@ -22,7 +22,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         export SECRET_KEY="supersecret"
     fi
 
-    if [ "$TRAVIS_BRANCH" == "production" ]; then
+    if [ "$TRAVIS_BRANCH" == "master" ]; then
         export SECRET_KEY="CHANGEME"
     fi
 
