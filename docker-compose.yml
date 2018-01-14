@@ -13,7 +13,6 @@ services:
 
   api:
     container_name: api
-    command: gunicorn -b 0.0.0.0:5000 manage:app
     build: .
     volumes:
       - '.:/usr/src'
