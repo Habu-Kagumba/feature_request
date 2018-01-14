@@ -2,7 +2,7 @@
 
 echo "Waiting for postgres..."
 
-while  ! pg_isready; do
+while ! pg_isready; do
   sleep 0.1
 done
 
