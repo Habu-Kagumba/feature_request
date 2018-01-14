@@ -28,8 +28,16 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 
         deploy() {
             family="feature-request-staging"
+            cluster="feature-request-staging"
+            service="feature-request-staging"
+
             make_tasks
             make_def
+
+            if [[ $(aws ecs update-service --cluster $cluster --service $service --task-definition $revision | $JQ '.service.taskDefinition') != $revision ]]; then
+                echo "Error updating service."
+                return 1
+            fi
         }
 
         aws_configure
