@@ -1,0 +1,75 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "api",
+            "image": "%s.dkr.ecr.us-east-1.amazonaws.com\/feature_request:staging",
+            "essential": true,
+            "memoryReservation": 300,
+            "cpu": 300,
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "APP_CONFIG_FILE",
+                    "value": "/usr/src/app/config/staging.py"
+                },
+                {
+                    "name": "DATABASE_TEST_URL",
+                    "value": "postgres://postgres:postgres@db:5432/feature_requests_test"
+                },
+                {
+                    "name": "DATABASE_URL",
+                    "value": "postgres://postgres:postgres@db:5432/feature_requests_staging"
+                },
+                {
+                    "name": "SECRET_KEY",
+                    "value": "supersecret"
+                }
+            ],
+            "links": [
+                "db"
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "feature-request-staging",
+                    "awslogs-region": "us-east-1"
+                }
+            }
+        },
+        {
+            "name": "db",
+            "image": "%s.dkr.ecr.us-east-1.amazonaws.com\/feature_request_db:staging",
+            "essential": true,
+            "memoryReservation": 300,
+            "cpu": 300,
+            "portMappings": [
+                {
+                    "containerPort": 5432
+                }
+            ],
+            "environment": [
+                {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "postgres"
+                },
+                {
+                    "name": "POSTGRES_USER",
+                    "value": "postgres"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "feature-request-staging",
+                    "awslogs-region": "us-east-1"
+                }
+            }
+        }
+    ]
+}

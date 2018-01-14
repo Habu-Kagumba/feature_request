@@ -19,7 +19,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     fi
 
     if [ "$TRAVIS_BRANCH" == "staging" ]; then
-        export SECRET_KEY="CHANGEME"
+        export SECRET_KEY="supersecret"
     fi
 
     if [ "$TRAVIS_BRANCH" == "production" ]; then
