@@ -1,5 +1,7 @@
 FROM python:3.6.2
 
+RUN apt-get update && apt-get -y install netcat
+
 RUN mkdir -p /usr/src
 WORKDIR /usr/src
 
